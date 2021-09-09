@@ -46,7 +46,7 @@ export const userSignUp = async function (email, password, userName) {
     );
 
     await promise.user.sendEmailVerification({
-      url: "http://feedback-application.netlify.app/path?confirm_email=true",
+      url: "https://feedback-application.netlify.app/path?confirm_email=true",
     });
     redirectedEmail();
   } catch (err) {
