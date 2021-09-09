@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
+firebase.analytics();
 
 // to signup new user
 
@@ -45,10 +45,25 @@ export const userSignUp = async function (email, password, userName) {
       })
     );
 
-    await promise.user.sendEmailVerification();
+    await promise.user.sendEmailVerification({
+      url: "https://feedback-application.netlify.app/path?confirm_email=true",
+    });
+    redirectedEmail();
   } catch (err) {
     throw err;
   }
+};
+
+const redirectedEmail = function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isConfirmingEmail = urlParams.get("confirm-email");
+
+  firebase
+    .auth()
+    .currentUser.getIdToken(!!isConfirmingEmail)
+    .then(() => {
+      console.log("email verified");
+    });
 };
 
 // to login user
@@ -75,7 +90,7 @@ export const logoutUser = async function () {
 function databseInitializer() {
   const DB = firebase.firestore();
   // getting user id
-  const { id } = JSON.parse(localStorage.getItem("userInfo"));
+  const { id } = JSON.parse(localStorage.getItem("userInfo")) || false;
 
   return [DB, id];
 }
@@ -170,7 +185,7 @@ export const commentsUpdater = async function (id, incrementValue = 1) {
   try {
     if (!DBUpdater) return;
     // incrementing the comment counter by 1
-   await updater.update({
+    await updater.update({
       [`${id}.replies`]: firebase.firestore.FieldValue.increment(incrementValue),
     });
   } catch (err) {
