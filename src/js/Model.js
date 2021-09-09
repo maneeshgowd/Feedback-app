@@ -56,7 +56,7 @@ export const userSignUp = async function (email, password, userName) {
 
 const redirectedEmail = function () {
   const urlParams = new URLSearchParams(window.location.search);
-  const isConfirmingEmail = urlParams.get("confirm-email");
+  const isConfirmingEmail = urlParams.get("confirm_email");
 
   firebase
     .auth()
