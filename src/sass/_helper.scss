@@ -1,0 +1,109 @@
+//colors
+$white: #ececec;
+$error-clr: hsl(0, 100%, 40%);
+$dark-clr: #2c2957;
+$accent-clr: #02b4b1;
+$ternary-clr: #6a71c4;
+$secondary-clr: #00a4c9;
+
+// font-weights
+
+$normal: 400;
+$medium: 500;
+$semi-bold: 600;
+$bold: 700;
+
+/////////////////////////////////@at-root
+$radius: 0.3em;
+// helper-mixins
+
+@mixin center() {
+  display: grid;
+  place-items: Center;
+}
+
+@mixin flex($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin buttons($bg-color: $white, $color: $white) {
+  border: 0;
+  font-family: raleway;
+  font-size: 1rem;
+  color: $color;
+  cursor: pointer;
+  padding: 0.7em 1em;
+  border-radius: $radius;
+  font-weight: $semi-bold;
+  text-transform: capitalize;
+  background-color: $bg-color;
+}
+
+// breakpoints
+
+@mixin tablet() {
+  $size: 640px;
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  $size: 1008px;
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin boxShadow($opacity: 0.05) {
+  box-shadow: 0 10px 10px rgba($dark-clr, $opacity);
+}
+
+@mixin linearGradient() {
+  background-image: linear-gradient(to right top, $accent-clr, $secondary-clr, $ternary-clr);
+}
+
+@mixin input() {
+  width: 100%;
+  color: $dark-clr;
+  font-weight: $medium;
+  padding: 0 0.5em;
+  font-size: 0.9rem;
+  border-radius: $radius;
+  background-color: rgba($ternary-clr, 0.15);
+
+  &:focus-within {
+    outline: 2px solid rgba($dark-clr, 0.7);
+  }
+}
+
+@mixin animation {
+  animation: feedback 800ms 0s forwards 1 ease;
+
+  @keyframes feedback {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+@mixin error($top:5.8em,$right:1em) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  font-size: 0.8rem;
+  padding: 0.05em 0.5em;
+  border-radius: 50%;
+  text-transform: lowercase;
+  color: $white;
+  cursor: pointer;
+  background-color: $error-clr;
+}

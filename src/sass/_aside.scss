@@ -1,0 +1,230 @@
+@use '_helper' as style;
+
+.content {
+  & .responsive {
+    gap: 2em;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    position: relative;
+
+    @include style.tablet {
+      margin-top: 2em;
+    }
+
+    @include style.desktop {
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr;
+    }
+  }
+}
+
+.aside {
+  width: 100%;
+  height: auto;
+  display: none;
+
+  &__logo,
+  &__hashtag,
+  &__roadmap {
+    max-width: 18em;
+    height: 12em;
+    padding: 1.5em;
+    border-radius: style.$radius;
+    @include style.boxShadow();
+  }
+
+  @include style.tablet {
+    @include style.flex();
+    gap: 1em;
+  }
+
+  @include style.desktop {
+    flex-direction: column;
+    align-self: start;
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+  }
+}
+
+.aside__logo {
+  color: style.$white;
+  @include style.linearGradient();
+  @include style.flex(flex-end, flex-start);
+  flex-direction: column;
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: style.$bold;
+  }
+
+  &--mini-title {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+    font-weight: style.$medium;
+  }
+
+  @include style.desktop {
+    width: 18em;
+  }
+}
+
+.aside__hashtag {
+  background-color: #fff;
+
+  & a {
+    padding: 0.6em 1.5em;
+    margin: 0.2rem 0;
+    font-size: 0.8rem;
+    display: inline-block;
+    color: style.$ternary-clr;
+    font-weight: style.$semi-bold;
+    border-radius: style.$radius;
+    background-color: rgba(style.$ternary-clr, 0.15);
+
+    &:hover,
+    &:focus {
+      color: style.$white;
+      background-color: style.$ternary-clr;
+    }
+
+    @include style.desktop {
+      margin: 0.5rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.aside__roadmap {
+  width: 100%;
+  background-color: #fff;
+  @include style.flex(space-between, flex-start);
+  flex-direction: column;
+
+  & .roadmap-header {
+    width: 100%;
+    color: style.$dark-clr;
+    @include style.flex(space-between);
+
+    &__title {
+      font-size: 1.125rem;
+      font-weight: style.$semi-bold;
+    }
+
+    & a {
+      font-size: 0.9rem;
+      text-decoration: underline;
+      font-weight: style.$medium;
+      color: style.$ternary-clr;
+    }
+  }
+
+  &__list {
+    width: 100%;
+    margin-top: 1em;
+    color: style.$dark-clr;
+
+    & li {
+      font-weight: style.$medium;
+      text-transform: capitalize;
+      margin: 1em 0 0 1em;
+
+      & span {
+        float: right;
+      }
+    }
+
+    & li:nth-child(1)::marker {
+      color: style.$accent-clr;
+    }
+
+    & li:nth-child(2)::marker {
+      color: orange;
+    }
+
+    & li:nth-child(3)::marker {
+      color: style.$ternary-clr;
+    }
+  }
+}
+
+.header__menu-window {
+  position: absolute;
+  padding-inline: 1.5em;
+  background-color: style.$secondary-clr;
+  @include style.flex();
+  flex-direction: column;
+  gap: 0.5em;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  width: 60%;
+  height: 100vh;
+  transition: all 300ms ease;
+
+  & .menu-window-close {
+    width: 1.8em;
+    position: absolute;
+    top: 1.5em;
+    right: 1em;
+    cursor: pointer;
+  }
+
+  & div {
+    align-self: flex-start;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    & .menu-window__title {
+      font-weight: style.$bold;
+      color: style.$white;
+      font-size: 1.125rem;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    & a {
+      padding: 0.5em 1em;
+      width: 100%;
+      text-align: center;
+      border-radius: style.$radius;
+      color: style.$white;
+      font-weight: style.$medium;
+      margin: 0 0.3em 0.5em;
+      background-color: darken(style.$secondary-clr, 5%);
+
+      &:hover,
+      &:focus {
+        background-color: darken(style.$secondary-clr, 10%);
+      }
+    }
+  }
+
+  & button {
+    color: #fff;
+    padding: 1em;
+    margin-top: 1em;
+    @include style.buttons(style.$dark-clr);
+    font-weight: style.$medium;
+
+    &:hover {
+      background-color: lighten(style.$dark-clr, 5%);
+    }
+
+    & img {
+      width: 1em;
+      vertical-align: bottom;
+    }
+  }
+
+  @include style.tablet {
+    display: none;
+  }
+}
+
+.menu-slider {
+  right: -70%;
+}

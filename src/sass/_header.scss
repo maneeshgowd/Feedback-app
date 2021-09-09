@@ -1,0 +1,33 @@
+@use '_helper' as style;
+
+.header {
+  width: 100%;
+  height: auto;
+  padding: 0 1em;
+  @include style.linearGradient();
+
+  @include style.tablet {
+    display: none;
+  }
+}
+
+.nav {
+  width: 100%;
+  min-height: 5em;
+  color: style.$white;
+  @include style.flex(space-between, center);
+
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: style.$bold;
+  }
+
+  &__menu {
+    cursor: pointer;
+
+    &__icons {
+      width: 2em;
+      pointer-events: none;
+    }
+  }
+}

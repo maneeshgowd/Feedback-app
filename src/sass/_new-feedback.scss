@@ -1,0 +1,211 @@
+@use '_helper'  as style;
+
+.new-feedback {
+  width: 100%;
+  padding: 1em;
+  height: auto;
+  overflow: hidden;
+
+  & .feedback-form {
+    padding: 1em;
+    margin-block: 5em 2em;
+    max-width: 45em;
+    position: relative;
+    color: style.$dark-clr;
+    background-color: #fff;
+    margin-inline: auto;
+    @include style.boxShadow();
+    border-radius: style.$radius;
+
+    @include style.animation;
+
+    @include style.tablet {
+      margin-block-end: 0;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      text-transform: capitalize;
+      font-weight: style.$bold;
+    }
+
+    &__back {
+      position: absolute;
+      top: -4em;
+      left: -1.5em;
+      @include style.flex();
+
+      @include style.buttons(transparent, style.$dark-clr);
+
+      &:hover > img {
+        transition: transform 300ms ease;
+        transform: translateX(-5px);
+      }
+
+      & img {
+        width: 1.4em;
+      }
+    }
+  }
+}
+
+.feedback-form__icons {
+  @include style.linearGradient();
+  @include style.boxShadow();
+  position: absolute;
+  top: -1.5em;
+  right: 2em;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+
+  @include style.tablet {
+    top: -2em;
+    width: 4em;
+    height: 4em;
+  }
+
+  & img {
+    width: 2em;
+  }
+}
+
+.feedback-form form {
+  @include style.flex(flex-start, flex-start);
+  gap: 1em;
+  flex-direction: column;
+
+  & label {
+    width: 100%;
+    text-transform: capitalize;
+    font-size: 1.125rem;
+    font-weight: style.$semi-bold;
+
+    & span {
+      display: block;
+      text-transform: initial;
+      font-size: 1rem;
+      opacity: 0.8;
+      font-size: 0.9rem;
+      margin: 0.5rem 0 1rem 0;
+      font-weight: style.$normal;
+    }
+
+    & input,
+    & select,
+    & textarea {
+      @include style.input();
+    }
+
+    & input,
+    & select {
+      height: 3em;
+    }
+
+    & textarea {
+      padding-top: 0.5em;
+      resize: none;
+    }
+
+    & select {
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+  }
+
+  & .form-buttons {
+    width: 100%;
+    @include style.flex(flex-start, flex-start);
+    flex-direction: column;
+    gap: 1em;
+
+    @include style.tablet {
+      width: auto;
+      flex-direction: row-reverse;
+      align-self: flex-end;
+    }
+  }
+
+  & button[type="submit"] {
+    @include style.buttons(style.$ternary-clr);
+    white-space: nowrap;
+    width: 100%;
+
+    &:hover {
+      background-color: style.$secondary-clr;
+    }
+
+    @include style.tablet {
+      width: auto;
+    }
+  }
+
+  & button[type="button"] {
+    @include style.buttons(style.$dark-clr);
+    width: 100%;
+
+    &:hover {
+      background-color: style.$error-clr;
+    }
+
+    @include style.tablet {
+      width: auto;
+    }
+  }
+}
+
+.feedback-label {
+  position: relative;
+
+  & small {
+    @include style.error();
+  }
+}
+
+.feedback-label:nth-child(3) {
+  & small {
+    top: 7em;
+
+    @include style.tablet {
+      top: 5.8em;
+    }
+  }
+}
+
+label[for="feedback-category"] {
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0.6em;
+    right: 0.8em;
+    border-left: 7px solid transparent;
+    border-top: 7px solid style.$dark-clr;
+    border-bottom: 7px solid transparent;
+    border-right: 7px solid transparent;
+  }
+}
+
+.edit-feedback {
+  @extend .new-feedback;
+  @include style.animation;
+
+  & .edit-form {
+    @extend .feedback-form;
+
+    &__title {
+      @extend .feedback-form__title;
+    }
+
+    &__back {
+      @extend .feedback-form__back;
+    }
+  }
+}
+
+.edit-form__icons {
+  @extend .feedback-form__icons;
+}

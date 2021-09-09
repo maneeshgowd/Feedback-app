@@ -1,0 +1,100 @@
+@use '_helper' as style;
+
+.sub-header {
+  width: 100%;
+  height: 4em;
+  padding: 0 1em;
+  @include style.flex(space-between, center);
+  background-color: style.$dark-clr;
+  transform: scaleX(1.11);
+
+  @include style.tablet {
+    transform: scale(1);
+    border-radius: style.$radius;
+    @include style.boxShadow(0.1);
+  }
+
+  @include style.desktop {
+    padding: 0 2em;
+    grid-column: 2 / -1;
+    grid-row: 1 / 2;
+  }
+
+  & .sort {
+    color: style.$white;
+    @include style.flex();
+
+    &__suggestion {
+      display: none;
+      margin-right: 2em;
+
+      @include style.tablet {
+        @include style.flex(initial, center);
+      }
+
+      &__icons {
+        width: 1.5em;
+        margin-right: .5em;
+      }
+
+      &__title {
+        font-weight: style.$bold;
+        font-size: clamp(0.8rem, 2vw, 1.125rem);
+      }
+    }
+
+    &__name::first-letter {
+      text-transform: uppercase;
+    }
+
+    &__name {
+      font-size: 0.8rem;
+      font-weight: style.$medium;
+    }
+
+    & select {
+      background-color: style.$dark-clr;
+      font-weight: style.$semi-bold;
+      color: style.$white;
+      font-size: 0.8rem;
+      cursor: pointer;
+      // padding:0 1em;
+ 
+
+      & option {
+        background-color: #fff;
+        font-weight: style.$semi-bold;
+        color: style.$dark-clr;
+      }
+    }
+  }
+
+  &__btn {
+    @include style.buttons();
+    font-size: clamp(0.7rem, 2vw, 1rem);
+    background-color: style.$secondary-clr;
+
+    &:hover {
+      background-color: style.$ternary-clr;
+    }
+  }
+
+  &__btn--logout {
+    display: none;
+    margin-left: auto;
+    background-color: transparent;
+
+    @include style.tablet {
+      display: block;
+    }
+
+    & img {
+      width: 1em;
+      vertical-align: bottom;
+    }
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

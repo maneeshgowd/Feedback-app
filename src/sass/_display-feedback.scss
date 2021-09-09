@@ -1,0 +1,167 @@
+@use '_helper' as style;
+
+.display-feedback {
+  width: 100%;
+  overflow:hidden;
+  margin-block: 2em;
+
+  .responsive {
+    max-width: 61.25em;
+    @include style.animation;
+
+    .feedback-user {
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.display-feedback__header {
+  width: 100%;
+  margin-bottom: 2em;
+  @include style.flex(space-between);
+
+  & .back {
+    margin-left: -1.5em;
+    @include style.flex();
+    @include style.buttons(transparent, style.$dark-clr);
+
+    &:hover > img {
+      transition: transform 300ms ease;
+      transform: translateX(-5px);
+    }
+
+    & img {
+      width: 1.4em;
+    }
+  }
+
+  & .edit {
+    @include style.buttons(style.$secondary-clr, style.$white);
+
+    &:hover {
+      background-color: style.$ternary-clr;
+    }
+  }
+}
+
+.feedback-comments,
+.add-comments {
+  width: 100%;
+  padding: 1.5em;
+  color: style.$dark-clr;
+  border-radius: style.$radius;
+  background-color: #fff;
+}
+
+.feedback-comments {
+  margin-bottom: 1em;
+  overflow-y: scroll;
+  max-height: 63.5em;
+  position: relative;
+
+  &__title {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .user-comments {
+    display: flex;
+    margin-top: 1em;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.5);
+    gap: 2em;
+
+    & img {
+      width: 3em;
+      height: 3em;
+      border-radius: 50%;
+      background-color: style.$white;
+
+      @include style.desktop {
+        width: 4em;
+        height: 4em;
+      }
+    }
+
+    &__user {
+      display: inline-block;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    &__comment {
+      font-size: 1rem;
+      margin-bottom: 1em;
+      max-width: 60ch;
+    }
+  }
+}
+
+.feedback-comments::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+.feedback-comments::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.feedback-comments::-webkit-scrollbar-thumb {
+  background-color: style.$dark-clr;
+}
+
+.add-comments {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(3, auto);
+  position: relative;
+
+  & small{
+    @include style.error(7em,3em);
+  }
+
+  &__title {
+    grid-column: 1/-1;
+    grid-row: 1 / 2;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
+    font-size: 1.375rem;
+  }
+
+  & textarea {
+    grid-column: 1/-1;
+    grid-row: 2/3;
+    background-color: style.$white;
+    border-radius: style.$radius;
+    font-weight: style.$medium;
+    color: style.$dark-clr;
+    width: 100%;
+    padding: 1em;
+    font-size: 0.9rem;
+    resize: none;
+    margin-bottom: 1.5rem;
+  }
+
+  & .characters-left {
+    grid-column: 1/2;
+    grid-row: 3/-1;
+    justify-self: start;
+    align-self: center;
+    font-size: 0.9rem;
+    font-weight: style.$medium;
+    opacity: 0.7;
+  }
+
+  & button {
+    grid-column: 2/-1;
+    grid-row: 3/-1;
+    justify-self: end;
+    @include style.buttons(style.$secondary-clr);
+
+    &:hover {
+      background-color: style.$ternary-clr;
+    }
+  }
+}
+
+ 

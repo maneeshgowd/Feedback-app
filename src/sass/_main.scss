@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media screen and(min-width:640px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  background-color: rgb(236, 236, 236);
+  font-family: raleway, sans-serif;
+  width: 100%;
+}
+
+.responsive {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 81.25rem;
+}
+
+p {
+  line-height: 180%;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+}
+
+input,
+select,
+textarea {
+  border: 0;
+  font-family: raleway, sans-serif;
+}
+
+textarea {
+  line-height: 160%;
+}
+
+.main-content {
+  overflow: hidden;
+  min-height: 100vh;
+  position: relative;
+}

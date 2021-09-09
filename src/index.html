@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="sass/style.scss" />
+    <script defer src="js/Controller.js"></script>
+    <title>Feedback</title>
+  </head>
+  <body>
+    <div class="main-content" id="main-content">
+      <header class="header">
+        <nav class="nav">
+          <h1 class="nav__logo">Feedback</h1>
+          <nav class="nav__menu" id="menu-bars">
+            <img class="nav__menu__icons" src="icons/hamburger.svg" alt="menu-bar" />
+          </nav>
+        </nav>
+      </header>
+
+      <section class="content">
+        <div class="responsive">
+          <aside class="aside">
+            <div class="aside__logo">
+              <h1 class="aside__logo__title">Feedback</h1>
+              <h2 class="aside__logo__title aside__logo--mini-title">Feedback Board</h2>
+            </div>
+            <div class="aside__hashtag" id="tag-filter">
+              <a href="#" target="_self" id="hashtag-all" rel="noopener no-referrer">All</a>
+              <a href="#" target="_self" id="hashtag-ui" rel="noopener no-referrer">UI</a>
+              <a href="#" target="_self" id="hashtag-ux" rel="noopener no-referrer">UX</a>
+              <a href="#" target="_self" id="hashtag-bug" rel="noopener no-referrer">Bug</a>
+              <a href="#" target="_self" id="hashtag-feature" rel="noopener no-referrer">Feature</a>
+              <a href="#" target="_self" id="hashtag-enhancement" rel="noopener no-referrer"
+                >Enhancement</a
+              >
+            </div>
+            <div class="aside__roadmap">
+              <div class="roadmap-header">
+                <h1 class="roadmap-header__title">Roadmap</h1>
+                <a href="#" target="_self" rel="noopener noreferrer">View</a>
+              </div>
+
+              <ul class="aside__roadmap__list">
+                <li>planned<span>2</span></li>
+                <li>in progress<span>3</span></li>
+                <li>live<span>1</span></li>
+              </ul>
+            </div>
+          </aside>
+
+          <header class="sub-header">
+            <div class="sort">
+              <div class="sort__suggestion">
+                <img src="icons/bulb.svg" class="sort__suggestion__icons" alt="suggestions" />
+                <h2 class="sort__suggestion__title">
+                  <span class="sort__suggestion__result" id="suggestions">0</span> Suggestions
+                </h2>
+              </div>
+              <span class="sort__name">sort by &nbsp;:</span>
+              <select name="sortby" id="sortby">
+                <option value="select" selected>select to sort</option>
+                <option value="Most Upvotes">Most Upvotes</option>
+                <option value="Most Comments">Most Comments</option>
+                <option value="Least Upvotes">Least Upvotes</option>
+                <option value="Least Comments">Least Comments</option>
+              </select>
+            </div>
+
+            <button type="button" class="sub-header__btn sub-header__btn--logout" id="logout">
+              <img src="icons/logout.svg" alt="logout" />
+              logout
+            </button>
+            <button type="button" class="sub-header__btn" id="add-feedback">+ add feedback</button>
+          </header>
+
+          <section class="feedback"><span class="no-feedback">No Feedback</span></section>
+          <div class="error-prompt hidden" id="error-prompt">logged out !</div>
+        </div>
+      </section>
+      <!--menubar-->
+      <div class="header__menu-window menu-slider" id="menu-window">
+        <img
+          src="icons/close-light.svg"
+          class="menu-window-close"
+          alt="close"
+          id="menu-window-close"
+        />
+        <div id="filter-menu">
+          <h2 class="menu-window__title">Filter by:</h2>
+          <a href="#" target="_self" id="hashtag-all" rel="noopener no-referrer">All</a>
+          <a href="#" target="_self" id="hashtag-ui" rel="noopener no-referrer">UI</a>
+          <a href="#" target="_self" id="hashtag-ux" rel="noopener no-referrer">UX</a>
+          <a href="#" target="_self" id="hashtag-bug" rel="noopener no-referrer">Bug</a>
+          <a href="#" target="_self" id="hashtag-feature" rel="noopener no-referrer">Feature</a>
+          <a href="#" target="_self" id="hashtag-enhancement" rel="noopener no-referrer"
+            >Enhancement</a
+          >
+        </div>
+        <button type="button" id="menu-logout">
+          <img src="icons/logout.svg" alt="logout" />
+          logout
+        </button>
+      </div>
+    </div>
+
+    <div class="new-feedback hidden" id="feedback-window">
+      <div class="feedback-form">
+        <button class="feedback-form__back" id="feedback-form__back">
+          <img src="icons/arrow-left.svg" alt="go-back" />
+          go back
+        </button>
+        <div class="feedback-form__icons">
+          <img src="icons/plus.svg" alt="Add feedback" />
+        </div>
+        <h1 class="feedback-form__title">create new feedback</h1>
+
+        <form action="#">
+          <label for="feedback-title" class="feedback-label"
+            >feedback title<br />
+            <span>Add a short, descriptive headline</span>
+            <input
+              type="text"
+              id="feedback-title"
+              name="feedback-title"
+              autocomplete="off"
+              required
+              minlength="10"
+              maxlength="40"
+            />
+            <small class="feedback-error hidden" title="Minimum of 10 characters required">i</small>
+          </label>
+
+          <label for="feedback-category" class="feedback-label"
+            >category<br />
+            <span>Choose a category for your feedback</span>
+            <select name="category" id="category">
+              <option value="ui">UI</option>
+              <option value="ux">UX</option>
+              <option value="bug">Bug</option>
+              <option value="feature">Feature</option>
+              <option value="enhancement">Enhancement</option>
+            </select>
+          </label>
+
+          <label for="feedback-content" class="feedback-label"
+            >feedback details<br />
+            <span>Include any specific comment on what should be improved, added etc..</span>
+            <textarea
+              name="feedback-content"
+              required
+              minlength="25"
+              id="feedback-details"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <small class="feedback-error hidden" title="Minimum of 25 characters required">i</small>
+          </label>
+
+          <div class="form-buttons">
+            <button type="submit" id="submit-feedback">add feedback</button>
+            <button type="button" id="cancel-feedback">cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="user-auth hidden" id="user-auth">
+      <form action="" class="user-auth__login" id="user-login">
+        <img src="icons/close.svg" alt="close" id="close" />
+        <span class="login-error-msg error-msg"></span>
+        <h1>login</h1>
+        <label for="existing-email"
+          >Email:<br />
+          <input type="email" id="existing-email" name="existing-email" required />
+        </label>
+        <label for="existing-password"
+          >Password:<br />
+          <input type="password" id="existing-password" name="existing-password" required />
+        </label>
+        <button type="submit" id="login-existing-user">login</button>
+        <a href="#" target="_self" rel="noopener noreferrer" id="create-user"
+          >create and account?</a
+        >
+      </form>
+
+      <form action="" class="user-auth__create hidden" id="create-account">
+        <img src="icons/close.svg" alt="close" id="close" />
+        <span class="create-error-msg error-msg"></span>
+        <h1>create account</h1>
+        <label for="new-username"
+          >Full name:<br />
+          <input type="text" id="new-username" min="5" max="20" name="new-username" required />
+        </label>
+        <label for="new-email">
+          Email address:<br />
+          <input type="email" name="new-email" id="new-email" required />
+        </label>
+        <div class="password-wrapper">
+          <label for="new-password">
+            Password:<br />
+            <input
+              type="password"
+              id="new-password"
+              min="6"
+              max="12"
+              name="new-password"
+              required
+            />
+          </label>
+          <label for="new-repeat-password">
+            Repeat-password:<br />
+            <input
+              type="password"
+              id="new-repeat-password"
+              min="6"
+              max="12"
+              name="new-repeat-password"
+              required
+            />
+          </label>
+        </div>
+        <button type="submit" id="verify-new-user">Verify and sign in</button>
+        <a href="#" target="_self" rel="noopener noreferrer" id="login-user">Login?</a>
+      </form>
+    </div>
+
+    <div class="loader hidden">
+      Please wait
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="display-feedback hidden" id="display-feedback">
+      <div class="responsive">
+        <div class="display-feedback__header">
+          <button class="back" id="display-feedback__back">
+            <img src="icons/arrow-left.svg" alt="go-back" />
+            go back
+          </button>
+
+          <button class="edit hidden" id="edit-feedback">edit feedback</button>
+        </div>
+        <section class="display-feedback__user"></section>
+
+        <div class="feedback-comments">
+          <h1 class="feedback-comments__title">0 Comments</h1>
+          <div class="feedback-user-comments"></div>
+        </div>
+
+        <div class="add-comments">
+          <h1 class="add-comments__title">Add comments</h1>
+
+          <textarea
+            name="comment"
+            id="comment"
+            cols="20"
+            rows="4"
+            placeholder="Type your comment here"
+            required
+            minlength="10"
+            maxlength="2550"
+          ></textarea>
+
+          <small class="comment-error hidden" title="Minimum of 10 characters required">i</small>
+          <span class="characters-left" id="characters-left"
+            ><span id="comments-counter">250</span> Characters left</span
+          >
+          <button type="button" id="post-comment">post comment</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="edit-feedback hidden" id="edit-feedback-window">
+      <div class="edit-form">
+        <button class="edit-form__back" id="edit-form__back">
+          <img src="icons/arrow-left.svg" alt="go-back" />
+          go back
+        </button>
+        <div class="edit-form__icons">
+          <img src="icons/edit.svg" alt="Edit feedback" />
+        </div>
+        <h1 class="edit-form__title">Edit existing feedback</h1>
+
+        <form action="#">
+          <label for="feedback-title" class="feedback-label"
+            >feedback title<br />
+            <span>Add a short, descriptive headline</span>
+            <input
+              type="text"
+              id="edit-feedback-title"
+              name="feedback-title"
+              autocomplete="off"
+              required
+              minlength="10"
+              maxlength="40"
+            />
+            <small class="feedback-error hidden" title="Minimum of 10 characters required">i</small>
+          </label>
+
+          <label for="feedback-category" class="feedback-label"
+            >category<br />
+            <span>Choose a category for your feedback</span>
+            <select name="edit-category" id="edit-feedback-category">
+              <option value="ui">UI</option>
+              <option value="ux">UX</option>
+              <option value="bug">Bug</option>
+              <option value="feature">Feature</option>
+              <option value="enhancement">Enhancement</option>
+            </select>
+          </label>
+
+          <label for="feedback-content" class="feedback-label"
+            >feedback details<br />
+            <span>Include any specific comment on what should be improved, added etc..</span>
+            <textarea
+              name="feedback-content"
+              required
+              minlength="25"
+              id="edit-feedback-details"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <small class="feedback-error hidden" title="Minimum of 25 characters required">i</small>
+          </label>
+
+          <div class="form-buttons">
+            <button type="submit" id="edit-submit-feedback">add feedback</button>
+            <button type="button" id="edit-cancel-feedback">cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
